@@ -34,10 +34,11 @@ dbConnection();
 
 /* ------------------------------------------------------- */
 
-// Middlewares:
-
 // Accept JSON:
 app.use(express.json());
+
+// Middlewares:
+app.use(require("./src/middlewares/findSearchSortPage"))
 
 // HOMEPATH
 app.all("/", (req, res) => {
@@ -52,5 +53,11 @@ app.all("/", (req, res) => {
     user: req.user,
   });
 });
+
+// Routes: index yazılmasına gerek yok.
+app.use(require("./src/routes"));
+
+// Error Handler
+app.use(require("./src/middlewares/errorHandler"));
 
 app.listen(PORT, HOST, () => console.log(`http://${HOST}:${PORT}`));
