@@ -13,3 +13,5 @@
 3- Anadizinde src klasörü oluşturuldu
 4- database bağlantısı için config klasörü içerisinde dbConnection dosyası oluşturuldu
 5- index.jsde çevre değişkenleri içe aktarılırken .env yi de require edip config işlemi yapılmalıdır. require("dotenv").config()
+6- Homepath yazıldı
+7-
