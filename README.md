@@ -84,6 +84,9 @@ Copy code
 npm start
 Open in Browser:
 
+Postman Link: https://go.postman.co/workspace/b6978b8e-7d93-4c69-be88-194670ac3583/collection/33299441-c7dc5e8d-bda4-4626-a451-ba194c94d9f2
+
+
 arduino
 Copy code
 http://localhost:3000
