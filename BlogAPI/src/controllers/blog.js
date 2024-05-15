@@ -17,7 +17,7 @@ const Blog = require("../models/blog");
 // ------------------------------------------
 module.exports = {
   list: async (req, res) => {
-    const data = await res.getModelList(Blog, {}, "blogCategoryId");
+    const data = await res.getModelList(Blog, {}, ["blogCategoryId", "userId"]);
 
     res.status(200).send({
       error: false,
@@ -52,9 +52,10 @@ module.exports = {
   },
 
   read: async (req, res) => {
-    const data = await Blog.findOne({ _id: req.params.blogId }).populate(
-      "blogCategoryId"
-    ); // get Primary Data
+    const data = await Blog.findOne({ _id: req.params.blogId }).populate([
+      "blogCategoryId",
+      "userId",
+    ]); // get Primary Data
 
     res.status(200).send({
       error: false,
