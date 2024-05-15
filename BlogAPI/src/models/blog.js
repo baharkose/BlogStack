@@ -11,7 +11,8 @@ const blogSchema = new mongoose.Schema(
     },
     blogCategoryId: {
       type: mongoose.Schema.ObjectId,
-      ref: "BlogCategory",
+      ref: "Category",
+      // model ismi yazılır
       required: true,
     },
     title: {
@@ -39,7 +40,7 @@ const blogSchema = new mongoose.Schema(
       default: [],
     },
   },
-  { collection: "blogPosts", timestamps: true }
+  { collection: "blogs", timestamps: true }
 );
 
 // Virtual Property for likes count

@@ -16,5 +16,7 @@ router.use("/users", require("./user"));
 router.use("/comments", require("./comment"));
 //category
 router.use("/categories", require("./category"));
+//blog
+router.use("/", require("./blog"));
 /* ------------------------------------------------------- */
 module.exports = router;
