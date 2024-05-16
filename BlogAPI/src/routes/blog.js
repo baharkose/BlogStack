@@ -12,7 +12,7 @@ const blog = require("../controllers/blog");
 router.route("/blogs").get(blog.list).post(blog.create);
 
 router
-  .route("/blogs/:postId")
+  .route("/blogs/:blogId")
   .get(blog.read)
   .put(blog.update)
   .delete(blog.delete);
