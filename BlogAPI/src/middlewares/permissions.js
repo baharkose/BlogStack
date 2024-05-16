@@ -1,7 +1,7 @@
 "use strict";
 
 /* -------------------------------------------------------
-    NODEJS EXPRESS | STOCK API
+    NODEJS EXPRESS | BlOG API
 ------------------------------------------------------- */
 
 // Middleware: permissions
