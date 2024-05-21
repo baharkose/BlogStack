@@ -52,7 +52,7 @@ module.exports = {
   },
 
   read: async (req, res) => {
-    const data = await Blog.findOne({ _id: req.params.blogId }).populate([
+    const data = await Blog.findOne({ _id: req.params.blogId}).populate([
       "blogCategoryId",
       "userId",
     ]); // get Primary Data
@@ -64,10 +64,10 @@ module.exports = {
   },
 
   update: async (req, res) => {
-    const customFilter = req.user?.isAdmin
-      ? {}
-      : { _id: req.user._id } && { _id: req.params.blogId };
-    const data = await Blog.updateOne({ customFilter }, req.body, {
+    // const customFilter = (req.user?.isAdmin ? {} : { _id: req.user._id }) && {
+    //   _id: req.params.blogId,
+    // };
+    const data = await Blog.updateOne({ _id: req.params.blogId }, req.body, {
       runValidators: true,
     });
 

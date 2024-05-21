@@ -15,10 +15,10 @@ const blog = require("../controllers/blog");
 router.route("/blogs").get(blog.list).post(permissions.isLogin, blog.create);
 
 router
-  .route(permissions.isLogin, "/blogs/:blogId")
+  .route("/blogs/:blogId")
   .get(permissions.isLogin, blog.read)
-  .put(permissions.isLogin, blog.update)
-  .delete(permissions.isLogin, blog.delete);
+  .put(permissions.isLogin,blog.update)
+  .delete(permissions.isLogin,blog.delete);
 
 router.get("/category/:categoryId/posts", blog.listCategoryPosts);
 

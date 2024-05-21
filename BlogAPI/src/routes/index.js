@@ -9,7 +9,8 @@ const router = require("express").Router();
 // routes/:
 
 // URL: /
-
+//auth
+router.use("/auth", require("./auth"));
 //users
 router.use("/users", require("./user"));
 //comment
@@ -20,7 +21,6 @@ router.use("/categories", require("./category"));
 router.use("/", require("./blog"));
 //token
 router.use("/tokens", require("./token"));
-//auth
-router.use("/auth", require("./auth"));
+
 /* ------------------------------------------------------- */
 module.exports = router;
