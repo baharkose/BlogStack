@@ -5,6 +5,7 @@ npm init -y
 npm i express dotenv mongoose express-async-errors
 npm i morgan swagger-autogen swagger-ui-express redoc-express
 mkdir logs
+jsonwebtoken
 nodemon
 https://www.toptal.com/developers/gitignore/
 node yazdık

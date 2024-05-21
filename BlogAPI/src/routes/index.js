@@ -20,5 +20,7 @@ router.use("/categories", require("./category"));
 router.use("/", require("./blog"));
 //token
 router.use("/tokens", require("./token"));
+//auth
+router.use("/auth", require("./auth"));
 /* ------------------------------------------------------- */
 module.exports = router;
