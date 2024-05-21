@@ -8,7 +8,7 @@ const Token = require("../models/token");
 const jwt = require("jsonwebtoken");
 
 module.exports = async (req, res, next) => {
-    // Eğer req. in headersın içerisinde auth... varsa al. 
+  // Eğer req. in headersın içerisinde auth... varsa al.
   const auth = req.headers?.authorization || null; // Token ...tokenKey...
   const tokenKey = auth ? auth.split(" ") : null; // ['Token', '...tokenKey...']
 
@@ -23,6 +23,7 @@ module.exports = async (req, res, next) => {
       );
       // usera ait diğer bilgileri populate ile getir.
       req.user = tokenData ? tokenData.userId : undefined;
+      console.log(req.user)
     } else if (tokenKey[0] == "Bearer") {
       // JWT:
 

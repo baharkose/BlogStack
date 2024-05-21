@@ -51,6 +51,7 @@ module.exports = {
               // şifreli bir token oluştur
               token: passwordEncrypt(user._id + Date.now()),
             });
+          
 
           // JWT
           // accessToken kısa süreli, refresh token uzun süreli
