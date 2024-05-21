@@ -37,8 +37,11 @@ dbConnection();
 // Accept JSON:
 app.use(express.json());
 
+// Check Authentication:
+app.use(require("./src/middlewares/authentication"));
+
 // Middlewares:
-app.use(require("./src/middlewares/findSearchSortPage"))
+app.use(require("./src/middlewares/findSearchSortPage"));
 
 // HOMEPATH
 app.all("/", (req, res) => {

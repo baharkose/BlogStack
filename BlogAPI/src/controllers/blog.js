@@ -12,7 +12,6 @@ require("express-async-errors");
 // Call Models:
 const Blog = require("../models/blog");
 
-
 // ------------------------------------------
 // Blog
 // ------------------------------------------
@@ -65,7 +64,10 @@ module.exports = {
   },
 
   update: async (req, res) => {
-    const data = await Blog.updateOne({ _id: req.params.blogId }, req.body, {
+    const customFilter = req.user?.isAdmin
+      ? {}
+      : { _id: req.user._id } && { _id: req.params.blogId };
+    const data = await Blog.updateOne({ customFilter }, req.body, {
       runValidators: true,
     });
 
