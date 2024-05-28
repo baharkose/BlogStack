@@ -43,6 +43,7 @@ app.use(require("./src/middlewares/authentication"));
 // Middlewares:
 app.use(require("./src/middlewares/findSearchSortPage"));
 
+
 // HOMEPATH
 app.all("/", (req, res) => {
   res.send({
