@@ -39,8 +39,6 @@ module.exports = {
     });
   },
 
-  // CRUD ->
-
   create: async (req, res) => {
     const data = await Blog.create(req.body);
 
@@ -52,21 +50,36 @@ module.exports = {
   },
 
   read: async (req, res) => {
-    const data = await Blog.findOne({ _id: req.params.blogId }).populate([
+    const blogId = req.params.blogId;
+    const ip = req.ip; // Kullanıcının IP adresini alıyoruz
+
+    const blog = await Blog.findOne({ _id: blogId }).populate([
       "blogCategoryId",
       "userId",
-    ]); // get Primary Data
+    ]); // Blogu ve ilgili verileri alıyoruz
+
+    if (!blog) {
+      return res.status(404).send({
+        error: true,
+        message: "Blog not found",
+      });
+    }
+
+    // IP adresi daha önce eklenmemişse, görüntülenme sayısını artır
+    if (!blog.viewers.includes(ip)) {
+      blog.views += 1;
+      blog.viewers.push(ip);
+      await blog.save();
+    }
 
     res.status(200).send({
       error: false,
-      result: data,
+      result: blog,
+      views: blog.views,
     });
   },
 
   update: async (req, res) => {
-    // const customFilter = (req.user?.isAdmin ? {} : { _id: req.user._id }) && {
-    //   _id: req.params.blogId,
-    // };
     const data = await Blog.updateOne({ _id: req.params.blogId }, req.body, {
       runValidators: true,
     });
@@ -74,7 +87,7 @@ module.exports = {
     res.status(202).send({
       error: false,
       body: req.body,
-      result: data, // update infos
+      result: data,
       newData: await Blog.findOne({ _id: req.params.blogId }),
     });
   },
@@ -83,14 +96,10 @@ module.exports = {
     const data = await Blog.deleteOne({ _id: req.params.blogId });
     res.sendStatus(data.deletedCount >= 1 ? 204 : 404);
   },
+
   getLike: async (req, res) => {
-    /*
-            #swagger.tags = ["Blogs"]
-            #swagger.summary = "Get Like Info"
-        */
     const blog = await Blog.findOne({ _id: req.params.blogId });
 
-    console.log(blog);
     res.status(200).send({
       error: false,
       didUserLike: false,
@@ -98,12 +107,8 @@ module.exports = {
       likes: blog.likes,
     });
   },
-  postLike: async (req, res) => {
-    /*
-            #swagger.tags = ["Blogs"]
-            #swagger.summary = "Add/Remove Like"
-        */
 
+  postLike: async (req, res) => {
     const blog = await Blog.findOne({ _id: req.params.blogId });
     const didUserLike = blog.likes.includes(req.user.id);
 
@@ -118,8 +123,7 @@ module.exports = {
         likes: blog.likes,
       });
     } else {
-      const likeUserId = blog.likes.find((item) => item == req.user.id);
-      blog.likes.remove(likeUserId);
+      blog.likes = blog.likes.filter((id) => id.toString() !== req.user.id.toString());
       await blog.save();
 
       res.status(200).send({
@@ -129,7 +133,9 @@ module.exports = {
         likes: blog.likes,
       });
     }
-  },
+  }
+
+
 
   // postLike: async (req, res) => {
   //   /*
