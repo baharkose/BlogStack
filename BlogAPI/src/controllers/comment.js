@@ -18,7 +18,7 @@ const Comment = require("../models/comment");
 
 module.exports = {
   list: async (req, res) => {
-    const data = await res.getModelList(Comment, {}, "userId");
+    const data = await res.getModelList(Comment, {}, ["userId", "blogId"]);
     res.status(200).send({
       error: false,
       count: data.length,

@@ -52,7 +52,7 @@ module.exports = {
   },
 
   read: async (req, res) => {
-    const data = await Blog.findOne({ _id: req.params.blogId}).populate([
+    const data = await Blog.findOne({ _id: req.params.blogId }).populate([
       "blogCategoryId",
       "userId",
     ]); // get Primary Data
@@ -82,5 +82,52 @@ module.exports = {
   delete: async (req, res) => {
     const data = await Blog.deleteOne({ _id: req.params.blogId });
     res.sendStatus(data.deletedCount >= 1 ? 204 : 404);
+  },
+  getLike: async (req, res) => {
+    /*
+            #swagger.tags = ["Blogs"]
+            #swagger.summary = "Get Like Info"
+        */
+    const blog = await Blog.findOne({ _id: req.params.blogId });
+
+    console.log(blog);
+    res.status(200).send({
+      error: false,
+      didUserLike: false,
+      countOfLikes: blog.likes.length,
+      likes: blog.likes,
+    });
+  },
+  postLike: async (req, res) => {
+    /*
+            #swagger.tags = ["Blogs"]
+            #swagger.summary = "Add/Remove Like"
+        */
+
+    const blog = await Blog.findOne({ _id: req.params.blogId });
+    const didUserLike = blog.likes.includes(req.user.id);
+
+    if (!didUserLike) {
+      blog.likes.push(req.user.id);
+      await blog.save();
+
+      res.status(200).send({
+        error: false,
+        didUserLike: true,
+        countOfLikes: blog.likes.length,
+        likes: blog.likes,
+      });
+    } else {
+      const likeUserId = blog.likes.find((item) => item == req.user.id);
+      blog.likes.remove(likeUserId);
+      await blog.save();
+
+      res.status(200).send({
+        error: false,
+        didUserLike: false,
+        countOfLikes: blog.likes.length,
+        likes: blog.likes,
+      });
+    }
   },
 };

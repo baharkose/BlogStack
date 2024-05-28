@@ -23,7 +23,7 @@ module.exports = async (req, res, next) => {
       );
       // usera ait diğer bilgileri populate ile getir.
       req.user = tokenData ? tokenData.userId : undefined;
-      console.log(req.user)
+      // console.log(req.user)
     } else if (tokenKey[0] == "Bearer") {
       // JWT:
 
