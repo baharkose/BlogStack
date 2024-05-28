@@ -130,4 +130,84 @@ module.exports = {
       });
     }
   },
+
+  // postLike: async (req, res) => {
+  //   /*
+  //       #swagger.tags = ["Blogs"]
+  //       #swagger.summary = "Add/Remove Like"
+  //   */
+
+  //   const blog = await Blog.findOne({ _id: req.params.blogId });
+  //   const userId = req.user.id; // Kullanıcı kimliğini alıyoruz
+  //   const didUserLike = blog.likes.includes(userId);
+
+  //   if (!didUserLike) {
+  //     // Kullanıcı daha önce beğenmemiş, beğeni ekle
+  //     blog.likes = [...blog.likes, userId]; // Kullanıcı kimliğini diziye ekle
+  //     await blog.save();
+
+  //     res.status(200).send({
+  //       error: false,
+  //       didUserLike: true,
+  //       countOfLikes: blog.likes.length,
+  //       likes: blog.likes,
+  //     });
+  //   } else {
+  //     // Kullanıcı daha önce beğenmiş, beğeni kaldır
+  //     blog.likes = blog.likes.filter((id) => id !== userId); // Kullanıcı kimliğini diziden çıkar
+  //     await blog.save();
+
+  //     res.status(200).send({
+  //       error: false,
+  //       didUserLike: false,
+  //       countOfLikes: blog.likes.length,
+  //       likes: blog.likes,
+  //     });
+  //   }
+  // },
+
+  // postLike: async (req, res) => {
+  /*
+        #swagger.tags = ["Blogs"]
+        #swagger.summary = "Add/Remove Like"
+    */
+
+  // UPDATE VERSİYONU
+
+  //   const blogId = req.params.blogId;
+  //   const userId = req.user.id;
+
+  //   const blog = await Blog.findOne({ _id: blogId });
+
+  //   if (!blog) {
+  //     return res.status(404).send({
+  //       error: true,
+  //       message: "Blog not found",
+  //     });
+  //   }
+
+  //   const didUserLike = blog.likes.includes(userId);
+
+  //   if (!didUserLike) {
+  //     // Kullanıcı daha önce beğenmemiş, beğeni ekle
+  //     await Blog.updateOne({ _id: blogId }, { $push: { likes: userId } });
+
+  //     res.status(200).send({
+  //       error: false,
+  //       didUserLike: true,
+  //       countOfLikes: blog.likes.length + 1, // beğeni eklediğimiz için 1 arttırıyoruz
+  //       likes: [...blog.likes, userId],
+  //     });
+  //   } else {
+  //     // Kullanıcı daha önce beğenmiş, beğeni kaldır
+  //     await Blog.updateOne({ _id: blogId }, { $pull: { likes: userId } });
+
+  //     res.status(200).send({
+  //       error: false,
+  //       didUserLike: false,
+  //       countOfLikes: blog.likes.length - 1, // beğeni kaldırdığımız için 1 azaltıyoruz
+  //       likes: blog.likes.filter((id) => id !== userId),
+  //     });
+  //   }
+  // },
 };
