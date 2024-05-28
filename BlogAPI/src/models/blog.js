@@ -45,6 +45,7 @@ const blogSchema = new mongoose.Schema(
     viewers: [
       {
         type: String,
+        // gelen ip
       },
     ],
   },

@@ -11,6 +11,7 @@ const Token = require("../models/token");
 
 module.exports = {
   list: async (req, res) => {
+    
     //bu api endpointini dokümantasyona dahil etme, yani swaggerUi tarafında gösterme
     /* 
         #swagger.ignore = true
