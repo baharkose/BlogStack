@@ -28,7 +28,7 @@ export const Root = () => {
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
-      <Route index element={<Dashboard />} />
+      <Route path="dashboard" element={<Dashboard />} />
       <Route path="about" element={<About />} />
       <Route element={<BlogDetail />} />
       <Route element={<MyBlog />} />
